@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Carousel from './library/carousel';
+import Carousel from './library/Carousel';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Carousel />, document.getElementById('root'));
