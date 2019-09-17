@@ -34,19 +34,13 @@ class Carousel extends Component {
     let item = [];
     let {listItem, amount } = this.props;
     let pageNow = this.state.pageNow
-    for (let i = (pageNow - 1) * amount; i < pageNow * amount; i++) {
-      console.log(i)
+    for (let i = (pageNow - 1) * 3; i < pageNow * amount; i++) {
       if (i < listItem.length)
         item.push(
-          <div className="item" key={`listItem${i}`}>
+          <div className="item" key={listItem[i]}>
             <span>{listItem[i]}</span>
           </div>
         );
-      else{
-        item.push(
-          <div className="item" key={`non-item${i}`}/>
-        )
-      }
     }
     return <div className="item-container">{item}</div>;
   };

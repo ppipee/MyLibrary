@@ -4,16 +4,28 @@ import prev from "./asset/prev.svg";
 import next from "./asset/next.svg";
 import { ceil } from "mathjs";
 class Carousel extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
+      listItem: [
+        "test1",
+        "test2",
+        "test3",
+        "test4",
+        "test5",
+        "test6",
+        "test7",
+        "test8",
+        "test9",
+        "test10"
+      ],
       pageNow: 1,
+      amount: 3
     };
   }
 
   changePage = state => {
-    let {listItem, amount } = this.props;
-    let page = this.state.pageNow
+    let { pageNow: page, listItem, amount } = this.state;
     page =
       page + state >= 1 && page + state <= ceil(listItem.length / amount)
         ? page + state
@@ -32,27 +44,20 @@ class Carousel extends Component {
 
   createItem = () => {
     let item = [];
-    let {listItem, amount } = this.props;
-    let pageNow = this.state.pageNow
-    for (let i = (pageNow - 1) * amount; i < pageNow * amount; i++) {
-      console.log(i)
+    let { pageNow, amount, listItem } = this.state;
+    for (let i = (pageNow - 1) * 3; i < pageNow * amount; i++) {
       if (i < listItem.length)
         item.push(
-          <div className="item" key={`listItem${i}`}>
+          <div className="item" key={listItem[i]}>
             <span>{listItem[i]}</span>
           </div>
         );
-      else{
-        item.push(
-          <div className="item" key={`non-item${i}`}/>
-        )
-      }
     }
     return <div className="item-container">{item}</div>;
   };
 
   createPointer = () => {
-    let total = ceil(this.props.listItem.length / this.props.amount);
+    let total = ceil(this.state.listItem.length / this.state.amount);
     let pointer = [];
     let nowPointing = this.state.pageNow;
     for (let i = 1; i <= total; i++) {
@@ -89,7 +94,7 @@ class Carousel extends Component {
           {item}
           <div className="next">
             {this.state.pageNow !==
-              ceil(this.props.listItem.length / this.props.amount) && (
+              ceil(this.state.listItem.length / this.state.amount) && (
               <img
                 className="center"
                 src={next}
